@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const QuizSection = ({
   quiz,
   categoryName,
   index,
-  score,
   question,
   renderOptions,
 }) => {
@@ -28,7 +27,7 @@ const QuizSection = ({
           </small>
         </div>
       </div>
-    </section>
+    </section> 
   );
 };
 

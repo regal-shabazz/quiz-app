@@ -70,10 +70,9 @@ const Main = () => {
       setClicked(false); // Reset clicked state when question changes
     }
 
-    if ((index === quiz.length - 1) && clicked ) {
+    if (index === quiz.length - 1 && clicked) {
       setCompleted(true);
-      
-    } 
+    }
   }, [index, quiz.length, clicked]);
 
   useEffect(() => {
@@ -86,17 +85,19 @@ const Main = () => {
     }
   }, [question]);
 
-  useEffect(() => {
-    if (clicked && answer.selectedOption && answer.correct_option) {
-      if (answer.selectedOption === answer.correct_option) {
-        setScore((prevScore) => ({
-          ...prevScore,
-          correct: prevScore.correct + 1,
-        }));
-      }
-      setClicked(false); // Reset clicked state after checking answer
-    }
-  }, [clicked, answer.selectedOption, answer.correct_option]);
+  // useEffect(() => {
+  //   if (clicked && answer.selectedOption && answer.correct_option) {
+  //     if (answer.selectedOption === answer.correct_option) {
+  //       setScore((prevScore) => ({
+  //         ...prevScore,
+  //         correct: prevScore.correct + 1,
+  //       }));
+  //     }
+  //   }
+  // }, [clicked, answer.selectedOption, answer.correct_option]);
+
+  console.log(score);
+  console.log(answer);
 
   useEffect(() => {
     if (question && question.incorrect_answers && question.correct_answer) {
@@ -138,7 +139,7 @@ const Main = () => {
   const handleNextQuestion = () => {
     if (quiz && index < quiz.length - 1) {
       setIndex((prevIndex) => prevIndex + 1);
-      setClicked(false)
+      setClicked(false);
     }
   };
 
@@ -147,8 +148,16 @@ const Main = () => {
       // Only update selectedOption if an option hasn't been clicked yet
       setAnswer({ ...answer, selectedOption: option });
       setClicked(true); // Set clicked to true after an option is clicked
-      handleNextQuestion(); // Move to the next question
+
+      if (option === answer.correct_option) {
+        setScore((prevScore) => ({
+          ...prevScore,
+          correct: prevScore.correct + 1,
+        }));
+      }
     }
+
+    handleNextQuestion();
   }
 
   const categoryName = categoryData.find(
@@ -165,8 +174,6 @@ const Main = () => {
       {option}
     </li>
   ));
-
-  console.log(score);
 
   return (
     <main>
