@@ -8,7 +8,7 @@ const HeroSection = ({ startSetup }) => {
         <div className="heading">
           <h1 className="title">QuizUp</h1>
           <p className="subtitle">
-            Master your knowledge, one question at a time
+            Test your knowledge, one question at a time
           </p>
         </div>
 
